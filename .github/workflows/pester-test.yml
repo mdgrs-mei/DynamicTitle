@@ -1,0 +1,29 @@
+name: Pester Test
+on: push
+
+jobs:
+  windows-latest:
+    name: Windows Latest
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Run tests on pwsh
+        shell: pwsh
+        run: |
+          & Tests\RunTests.ps1
+      - name: Run tests on Windows PowerShell
+        shell: powershell
+        run: |
+          & Tests\RunTests.ps1
+
+  ubuntu-latest:
+    name: Ubuntu Latest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Run tests
+        shell: pwsh
+        run: |
+          & ./Tests/RunTests.ps1
