@@ -39,17 +39,29 @@ This one-liner shows a live-updating clock on the title bar. The specified Scrip
 Start-DTTitle {Get-Date}
 ```
 
+![dt_clock](https://user-images.githubusercontent.com/81177095/224546336-b7ecc18f-31b6-4a9b-9688-22e0da81d266.gif)
+
 If an array is returned from the script block, they are shown with a vertical scrolling.
 
 ```powershell
-Start-DTTitle {'Hello', 'World'}
+Start-DTTitle {'🌷 Hello', '🌼 World'}
 ```
 
-https://user-images.githubusercontent.com/81177095/224492957-8b00c343-9d2f-456c-8db5-839917f1ed9a.mp4
+![dt_vertical_scroll](https://user-images.githubusercontent.com/81177095/224547384-37f69aaf-0089-49f6-9728-589679142206.gif)
+
+If the title width is fixed by your terminal app or you want to limit the width, you can specify `HorizontalScrollFrameWidth` parameter. The title text Horizontally scrolls when its length is longer than the parameter.
+
+```powershell
+Start-DTTitle {
+    '🍷 Showing a long text as a title 🍸'
+} -HorizontalScrollFrameWidth 25
+```
+
+![dt_horizontal_scroll](https://user-images.githubusercontent.com/81177095/224547683-9c417aa6-689f-403f-809f-ea2c4e696b63.gif)
 
 ## Jobs
 
-Although the ScriptBlock specified to `Start-DTTitle` runs on another thread to avoid blocking, sometimes you need to get some information from the main thread such as Current Directory, or you might need another thread to get information that takes long time to process. For this purpose, the module provides you with three types of job objects. In either case, you can get the job output in a thread-safe way like this:
+Although the ScriptBlock specified to `Start-DTTitle` runs on another thread to avoid blocking, sometimes you need to get information from the main thread such as Current Directory, or you might need another thread to get some information that takes long time to process. For this purpose, the module provides you with three types of job objects. In either case, you can get the job output in a thread-safe way like this:
 
 ```powershell
 $output = Get-DTJobLatestOutput $job
