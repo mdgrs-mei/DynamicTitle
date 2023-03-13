@@ -25,7 +25,12 @@ function StartDTGitStatus
         $branch = git branch --show-current
         if ($LastExitCode -ne 0)
         {
+            # not a git repository
             return
+        }
+        if (-not $branch)
+        {
+            $branch = '❔'
         }
 
         $statusLines = git --no-optional-locks status -s
