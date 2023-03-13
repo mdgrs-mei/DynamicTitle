@@ -28,7 +28,7 @@ function StartDTGitStatus
             return
         }
 
-        $statusLines = git status -s
+        $statusLines = git --no-optional-locks status -s
         $modifiedCount = 0
         $unversionedCount = 0
         foreach ($line in $statusLines)
