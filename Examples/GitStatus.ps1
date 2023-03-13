@@ -10,7 +10,7 @@ function StartDTGitStatus
     }
 
     $promptJob = Start-DTJobPromptCallback -ScriptBlock {
-        Get-Location
+        (Get-Location).Path
     }
 
     $gitJob = Start-DTJobBackgroundThreadTimer -ScriptBlock {
@@ -49,7 +49,8 @@ function StartDTGitStatus
             }
         }
 
-        '🌿[{0}] ✏️{1}❔{2}' -f $branch, $modifiedCount, $unversionedCount
+        $gitStatus = '🌿[{0}] ✏️{1}❔{2}' -f $branch, $modifiedCount, $unversionedCount
+        $gitStatus, $location
         
     } -IntervalMilliseconds 1000 -ArgumentList $promptJob -InitializationScript $initializationScript -InitializationArgumentList $modulePath
 
@@ -57,14 +58,18 @@ function StartDTGitStatus
         param($promptJob, $gitJob)
 
         $location = Get-DTJobLatestOutput $promptJob
+        $gitStatus, $gitLocation = Get-DTJobLatestOutput $gitJob
+
         if ($location)
         {
-            $location = Split-Path $location -Leaf
+            $folderName = Split-Path $location -Leaf
         }
-
-        $gitStatus = Get-DTJobLatestOutput $gitJob
+        if ($gitLocation -ne $location)
+        {
+            $gitStatus = $null
+        }
         
-        '🗂️{0} {1}' -f $location, $gitStatus
+        '🗂️{0} {1}' -f $folderName, $gitStatus
     }
     
     $params = @{
