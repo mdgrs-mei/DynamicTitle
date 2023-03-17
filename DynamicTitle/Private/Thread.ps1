@@ -1,13 +1,6 @@
-function StartThread([ScriptBlock]$scriptBlock, $arguments, $psHost)
+function StartThread([ScriptBlock]$scriptBlock, $arguments)
 {
-    if ($psHost)
-    {
-        $runspace = [RunSpaceFactory]::CreateRunspace($psHost)
-    }
-    else
-    {
-        $runspace = [RunSpaceFactory]::CreateRunspace()
-    }
+    $runspace = [RunSpaceFactory]::CreateRunspace()
     $runspace.Open()
 
     $powershell = [PowerShell]::Create()

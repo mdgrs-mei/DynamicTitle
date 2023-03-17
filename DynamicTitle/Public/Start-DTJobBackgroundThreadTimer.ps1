@@ -89,7 +89,7 @@ function Start-DTJobBackgroundThreadTimer
             }
         }
 
-        $thread = StartThread $threadFunc $arguments $host
+        $thread = StartThread $threadFunc $arguments
 
         $job = [PSCustomObject]@{
             Sync = $sync

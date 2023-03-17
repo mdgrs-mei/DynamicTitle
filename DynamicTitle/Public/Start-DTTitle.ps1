@@ -85,6 +85,7 @@ function Start-DTTitle
         $horizontalScrollWaitFrame = [Int]($HorizontalScrollWaitMilliseconds / $UpdateIntervalMilliseconds)
 
         $arguments = @{
+            host = $host
             scriptBlock = $ScriptBlock.Ast.GetScriptBlock()
             argumentList = $ArgumentList
             intervalMilliseconds = $UpdateIntervalMilliseconds
@@ -115,12 +116,12 @@ function Start-DTTitle
             while ($dynamicTitleUpdateMain.Tick())
             {
                 $private:titleLines = [string[]]@($args.scriptBlock.Invoke($args.argumentList))
-                $host.UI.RawUI.WindowTitle = $dynamicTitleUpdateMain.GetTitle($titleLines)
+                $args.host.UI.RawUI.WindowTitle = $dynamicTitleUpdateMain.GetTitle($titleLines)
             }
         }
 
         $originalTitle = $host.UI.RawUI.WindowTitle
-        $thread = StartThread $threadFunc $arguments $host
+        $thread = StartThread $threadFunc $arguments
         $script:globalStore.SetTitleUpdateThread($thread, $originalTitle)
     }
 }
