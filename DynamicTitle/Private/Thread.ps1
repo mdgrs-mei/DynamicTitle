@@ -5,8 +5,8 @@ function StartThread([ScriptBlock]$scriptBlock, $arguments)
 
     $powershell = [PowerShell]::Create()
     $powershell.Runspace = $runspace
-    $powershell.AddScript($scriptBlock.ToString())
-    $powershell.AddArgument($arguments)
+    $powershell.AddScript($scriptBlock.ToString()) | Out-Null
+    $powershell.AddArgument($arguments) | Out-Null
 
     $asyncHandle = $powershell.BeginInvoke()
 
