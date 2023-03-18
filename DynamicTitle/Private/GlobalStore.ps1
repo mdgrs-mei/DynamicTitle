@@ -88,7 +88,14 @@ class GlobalStore
         {
             $private:scriptBlock = $callback[0]
             $private:arguments = $callback[1]
-            $scriptBlock.Invoke($arguments)
+            try
+            {
+                $scriptBlock.Invoke($arguments)
+            }
+            catch
+            {
+                $_ | Out-Default
+            }
         }
         return $this.originalPrompt.Invoke()
     }
@@ -133,7 +140,14 @@ class GlobalStore
             $private:scriptBlock = $callback[0]
             $private:arguments = $callback[1]
             $arguments.command = $command
-            $scriptBlock.Invoke($arguments)
+            try
+            {
+                $scriptBlock.Invoke($arguments)
+            }
+            catch
+            {
+                $_ | Out-Default
+            }
         }
         return $command
     }
