@@ -4,8 +4,8 @@
     }
 
     It 'should return a job output' {
-        $job = Start-DTJobBackgroundThreadTimer -ScriptBlock {'hello'} -IntervalMilliseconds 500
-        Start-Sleep -Milliseconds 100
+        $job = Start-DTJobBackgroundThreadTimer -ScriptBlock {'hello'} -IntervalMilliseconds 1000
+        Start-Sleep -Milliseconds 500
         $job | Get-DTJobLatestOutput | Should -Be 'hello'
     }
 
