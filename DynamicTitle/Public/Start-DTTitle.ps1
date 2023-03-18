@@ -110,13 +110,23 @@ function Start-DTTitle
 
             if ($args.initializationScript)
             {
-                Invoke-Command $args.initializationScript -NoNewScope -ArgumentList $args.initializationArgumentList
+                $private:dynamicTitleErrorVariable = $null
+                Invoke-Command $args.initializationScript -NoNewScope -ArgumentList $args.initializationArgumentList -ErrorVariable dynamicTitleErrorVariable
+                if ($dynamicTitleErrorVariable)
+                {
+                    $args.host.UI.WriteErrorLine($dynamicTitleErrorVariable)
+                }
             }
 
             while ($dynamicTitleUpdateMain.Tick())
             {
-                $private:titleLines = [string[]]@($args.scriptBlock.Invoke($args.argumentList))
+                $private:dynamicTitleErrorVariable = $null
+                $private:titleLines = [string[]]@(Invoke-Command $args.scriptBlock -ArgumentList $args.argumentList -ErrorVariable dynamicTitleErrorVariable)
                 $args.host.UI.RawUI.WindowTitle = $dynamicTitleUpdateMain.GetTitle($titleLines)
+                if ($dynamicTitleErrorVariable)
+                {
+                    $args.host.UI.WriteErrorLine($dynamicTitleErrorVariable)
+                }
             }
         }
 

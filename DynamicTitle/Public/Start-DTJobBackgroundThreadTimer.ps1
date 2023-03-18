@@ -59,6 +59,7 @@ function Start-DTJobBackgroundThreadTimer
         $sync = [System.Collections.Hashtable]::Synchronized(@{})
 
         $arguments = @{
+            host = $host
             sync = $sync
             scriptBlock = $ScriptBlock.Ast.GetScriptBlock()
             argumentList = $ArgumentList
@@ -80,12 +81,22 @@ function Start-DTJobBackgroundThreadTimer
 
             if ($args.initializationScript)
             {
-                Invoke-Command $args.initializationScript -NoNewScope -ArgumentList $args.initializationArgumentList
+                $private:dynamicTitleErrorVariable = $null
+                Invoke-Command $args.initializationScript -NoNewScope -ArgumentList $args.initializationArgumentList -ErrorVariable dynamicTitleErrorVariable
+                if ($dynamicTitleErrorVariable)
+                {
+                    $args.host.UI.WriteErrorLine($dynamicTitleErrorVariable)
+                }
             }
 
             while ($dynamicTitleBackgroundThreadTimerJob.Tick())
             {
-                $args.sync.output = $args.scriptBlock.Invoke($args.argumentList)
+                $private:dynamicTitleErrorVariable = $null
+                $args.sync.output = Invoke-Command $args.scriptBlock -ArgumentList $args.argumentList -ErrorVariable dynamicTitleErrorVariable
+                if ($dynamicTitleErrorVariable)
+                {
+                    $args.host.UI.WriteErrorLine($dynamicTitleErrorVariable)
+                }
             }
         }
 
