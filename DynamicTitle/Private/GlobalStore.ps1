@@ -5,6 +5,7 @@ class GlobalStore
     $isPromptReplaced = $false
     $originalPSConsoleHostReadLine = $null
     $isReadLineReplaced = $false
+    $isInLegacyApplicationMode = $false
     $titleUpdateThread = $null
     $backgroundThreadTimerJobs = @()
     $promptCallbacks = @()
@@ -12,6 +13,11 @@ class GlobalStore
 
     [void] Clear()
     {
+        if ($this.isInLegacyApplicationMode)
+        {
+            $this.ExitLegacyApplicationMode()
+        }
+
         $this.ClearTitleUpdateThread()
 
         foreach ($timerJob in $this.backgroundThreadTimerJobs)
@@ -37,6 +43,28 @@ class GlobalStore
             (Get-Host).UI.RawUI.WindowTitle = $this.originalTitle
             $this.originalTitle = $null
         }
+    }
+
+    [void] EnterLegacyApplicationMode()
+    {
+        if ($this.isInLegacyApplicationMode)
+        {
+            Write-Error -Message 'Already in Legacy Application Mode.' -Category InvalidOperation
+            return
+        }
+        (Get-Host).NotifyBeginApplication()
+        $this.isInLegacyApplicationMode = $true
+    }
+
+    [void] ExitLegacyApplicationMode()
+    {
+        if (-not $this.isInLegacyApplicationMode)
+        {
+            Write-Error -Message 'Not in Legacy Application Mode.' -Category InvalidOperation
+            return
+        }
+        (Get-Host).NotifyEndApplication()
+        $this.isInLegacyApplicationMode = $false
     }
 
     [void] SetTitleUpdateThread($thread, [string]$originalTitle)
