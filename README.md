@@ -153,3 +153,7 @@ Get-Help Start-DTTitle -Full
 ```
 
 For more code examples, please see the scripts under [Examples](./Examples) folder.
+
+## Changelog
+
+Changelog is available [here](https://github.com/mdgrs-mei/DynamicTitle/blob/main/CHANGELOG.md).
