@@ -115,6 +115,23 @@ Start-DTTitle {
 } -ArgumentList $job
 ```
 
+## Legacy Application Mode
+
+When command line applications are executed on the main thread, the host saves the title string before calling the application and resets it when the application returns. This behavior sometimes causes a blink on the title as you are changing the title on a background thread.
+
+`Enter-DTLegacyApplicationMode` calls `$host.NotifyBeginApplication()` to notify the host that the subsequent commands are all legacy command line applications, and therefore the title reset behavior on every command call is suppressed. Note that this workaround stops all the state restore from the command line applications which may cause some other issues.
+
+```powershell
+Start-DTTitle {Get-Date}
+Enter-DTLegacyApplicationMode
+# Calling command line applications here does not cause a blink on the title.
+git status -s
+# ...
+Exit-DTLegacyApplicationMode
+# This call causes a blink.
+git status -s
+```
+
 ## Terminal Settings Recommendations
 
 - If you are using Windows Terminal, there is a setting called `Tab width mode`. Setting it to `Title length` or `Compact` should be better for longer titles.
