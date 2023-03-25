@@ -1,9 +1,14 @@
-Import-Module $PSScriptRoot\..\DynamicTitle
+#Requires -Modules DynamicTitle
+
+if (-not $IsWindows)
+{
+    Write-Error -Message 'Runs only on Windows.' -Category InvalidOperation
+    return
+}
+$modulePath = Join-Path (Get-Module DynamicTitle).ModuleBase 'DynamicTitle.psd1'
 
 function StartDTStatusBar
 {
-    $modulePath = "$PSScriptRoot\..\DynamicTitle"
-
     $weatherJob = Start-DTJobBackgroundThreadTimer -ScriptBlock {
         $weather = Invoke-RestMethod https://wttr.in/?format="%c%t\n"
         $weather

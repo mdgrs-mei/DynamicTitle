@@ -1,4 +1,6 @@
-Import-Module $PSScriptRoot\..\DynamicTitle
+#Requires -Modules DynamicTitle
+
+$modulePath = Join-Path (Get-Module DynamicTitle).ModuleBase 'DynamicTitle.psd1'
 
 function StartDTCommandExecutionTime
 {
