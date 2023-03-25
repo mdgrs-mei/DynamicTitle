@@ -25,10 +25,10 @@ function Start-DTExample
     (
         [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
         [ValidateScript({
-            $_ -in (Get-ChildItem (Get-DTExamplesPath)).BaseName 
+            $_ -in (Get-ChildItem (Get-DTExamplesPath)).BaseName
         })]
         [ArgumentCompleter({
-            param($commandName, $parameterName, $wordToComplete)
+            $wordToComplete = $args[2]
             $names = (Get-ChildItem (Get-DTExamplesPath)).BaseName
             $names -like "$wordToComplete*"
         })]
