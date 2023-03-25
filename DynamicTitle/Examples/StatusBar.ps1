@@ -1,6 +1,6 @@
 ﻿#Requires -Modules DynamicTitle
 
-if (-not $IsWindows)
+if ($IsLinux -or $IsMacOS)
 {
     Write-Error -Message 'Runs only on Windows.' -Category InvalidOperation
     return
