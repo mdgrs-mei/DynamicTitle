@@ -11,6 +11,7 @@ $initializationScript = {
     param ($modulePath)
     Import-Module $modulePath
     $psVersion = 'PS ' + $PSVersionTable.PSVersion.ToString()
+    $psVersion # For PSUseDeclaredVarsMoreThanAssignments false detection.
 }
 
 $netThroughputJob = Start-DTJobBackgroundThreadTimer -ScriptBlock {
@@ -65,7 +66,7 @@ $gitJob = Start-DTJobBackgroundThreadTimer -ScriptBlock {
 
     $gitStatus = '🌿[{0}] ✏️{1}❔{2}' -f $branch, $modifiedCount, $unversionedCount
     $gitStatus, $location
-    
+
 } -IntervalMilliseconds 2000 -ArgumentList $promptJob -InitializationScript $initializationScript -InitializationArgumentList $modulePath
 
 $scriptBlock = {
@@ -128,7 +129,7 @@ $scriptBlock = {
     {
         $gitStatus = $null
     }
-    
+
     '{0} {1} {2} 🗂️{3} {4} {5}' -f $commandStatus, $psVersion, $commandSegment, $folderName, $gitStatus, $netThroughputSegment
 }
 

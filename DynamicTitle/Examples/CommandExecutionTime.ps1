@@ -15,6 +15,7 @@ $initializationScript = {
     param ($modulePath)
     Import-Module $modulePath
     $psVersion = 'PS ' + $PSVersionTable.PSVersion.ToString()
+    $psVersion # For PSUseDeclaredVarsMoreThanAssignments false detection.
 }
 $scriptBlock = {
     param($commandStartJob, $commandEndJob)
@@ -50,7 +51,7 @@ $scriptBlock = {
             }
         }
     }
-    
+
     '{0} {1} {2}' -f $status, $psVersion, $commandSegment
 }
 

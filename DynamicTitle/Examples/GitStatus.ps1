@@ -49,7 +49,7 @@ $gitJob = Start-DTJobBackgroundThreadTimer -ScriptBlock {
 
     $gitStatus = '🌿[{0}] ✏️{1}❔{2}' -f $branch, $modifiedCount, $unversionedCount
     $gitStatus, $location
-    
+
 } -IntervalMilliseconds 1000 -ArgumentList $promptJob -InitializationScript $initializationScript -InitializationArgumentList $modulePath
 
 $scriptBlock = {
@@ -66,7 +66,7 @@ $scriptBlock = {
     {
         $gitStatus = $null
     }
-    
+
     '🗂️{0} {1}' -f $folderName, $gitStatus
 }
 
