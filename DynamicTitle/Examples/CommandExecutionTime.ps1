@@ -59,7 +59,7 @@ $params = @{
     ScriptBlock = $scriptBlock
     ArgumentList = $commandStartJob, $commandEndJob
     InitializationScript = $initializationScript
-    InitializationArgumentList = "$PSScriptRoot\..\DynamicTitle"
+    InitializationArgumentList = $modulePath
 }
 
 Start-DTTitle @params
