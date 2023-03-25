@@ -1,4 +1,4 @@
-#Requires -Modules DynamicTitle
+﻿#Requires -Modules DynamicTitle
 
 if (-not $IsWindows)
 {

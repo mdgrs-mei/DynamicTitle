@@ -1,4 +1,4 @@
-#Requires -Modules DynamicTitle
+﻿#Requires -Modules DynamicTitle
 
 $modulePath = Join-Path (Get-Module DynamicTitle).ModuleBase 'DynamicTitle.psd1'
 
