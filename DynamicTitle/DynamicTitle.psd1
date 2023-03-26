@@ -64,7 +64,9 @@ PowerShellVersion = '5.1'
 FunctionsToExport = @(
     'Enter-DTLegacyApplicationMode',
     'Exit-DTLegacyApplicationMode',
+    'Get-DTExamplesPath',
     'Get-DTJobLatestOutput',
+    'Start-DTExample',
     'Start-DTJobBackgroundThreadTimer',
     'Start-DTJobCommandPreExecutionCallback',
     'Start-DTJobPromptCallback',
