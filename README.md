@@ -138,7 +138,28 @@ git status -s
 
 - [Hyper](https://github.com/vercel/hyper) terminal allows you to change the appearance of the title by css, such as font and size. It's a good fit for this module if you want the title to stand out or want to use special emojis.
 
-## Help and more Examples
+## Examples
+
+Examples are included in the module. You can play an example DynamicTitle with `Start-DTExample` function. The tab completion for the `Name` parameter helps you find available examples.
+
+```powershell
+Start-DTExample -Name CommandExecutionTime
+```
+
+`Get-DTExamplesPath` returns the path where the example scripts are stored.
+
+```powershell
+PS D:\> Get-ChildItem (Get-DTExamplesPath)
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---           3/26/2023  1:56 PM           4095 AllInOne.ps1
+-a---           3/26/2023  1:56 PM           1810 CommandExecutionTime.ps1
+-a---           3/26/2023  1:56 PM           1956 GitStatus.ps1
+-a---           3/26/2023  1:56 PM           1512 StatusBar.ps1
+```
+
+## Get-Help
 
 `Get-Command` can list all the available functions in the module:
 
@@ -146,13 +167,11 @@ git status -s
 Get-Command -Module DynamicTitle
 ```
 
-To get the detailed help of a function, please try:
+To get the detailed help of a function, try:
 
 ```powershell
 Get-Help Start-DTTitle -Full
 ```
-
-For more code examples, please see the scripts under [Examples](./Examples) folder.
 
 ## Changelog
 
