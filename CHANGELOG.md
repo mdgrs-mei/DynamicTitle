@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0] - 2023-03-26
+
+### Added
+
+- Added `Get-DTExamplesPath`
+- Added `Start-DTExample`
+- Added Examples directory to the module
+
 ## [0.2.0] - 2023-03-20
 
 ### Added
