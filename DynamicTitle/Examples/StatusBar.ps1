@@ -9,7 +9,7 @@ $modulePath = Join-Path (Get-Module DynamicTitle).ModuleBase 'DynamicTitle.psd1'
 
 $weatherJob = Start-DTJobBackgroundThreadTimer -ScriptBlock {
     $weather = Invoke-RestMethod https://wttr.in/?format="%c%t\n"
-    $weather
+    $weather.Trim()
 } -IntervalMilliseconds 60000
 
 $systemInfoJob = Start-DTJobBackgroundThreadTimer -ScriptBlock {
