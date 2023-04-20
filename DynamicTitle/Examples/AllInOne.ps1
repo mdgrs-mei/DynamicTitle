@@ -7,13 +7,6 @@ if ($IsLinux -or $IsMacOS)
 }
 $modulePath = Join-Path (Get-Module DynamicTitle).ModuleBase 'DynamicTitle.psd1'
 
-$initializationScript = {
-    param ($modulePath)
-    Import-Module $modulePath
-    $psVersion = 'PS ' + $PSVersionTable.PSVersion.ToString()
-    $psVersion # For PSUseDeclaredVarsMoreThanAssignments false detection.
-}
-
 $netThroughputJob = Start-DTJobBackgroundThreadTimer -ScriptBlock {
     $netInterface = (Get-CimInstance -class Win32_PerfFormattedData_Tcpip_NetworkInterface)[0]
     [Int]($netInterface.BytesReceivedPersec * 8 / 1MB), [Int]($netInterface.BytesSentPersec * 8 / 1MB)
@@ -26,6 +19,12 @@ $commandStartJob = Start-DTJobCommandPreExecutionCallback -ScriptBlock {
 
 $promptJob = Start-DTJobPromptCallback -ScriptBlock {
     (Get-Date), (Get-Location).Path
+}
+
+
+$importModuleScript = {
+    param ($modulePath)
+    Import-Module $modulePath
 }
 
 $gitJob = Start-DTJobBackgroundThreadTimer -ScriptBlock {
@@ -67,7 +66,19 @@ $gitJob = Start-DTJobBackgroundThreadTimer -ScriptBlock {
     $gitStatus = '🌿[{0}] ✏️{1}❔{2}' -f $branch, $modifiedCount, $unversionedCount
     $gitStatus, $location
 
-} -IntervalMilliseconds 2000 -ArgumentList $promptJob -InitializationScript $initializationScript -InitializationArgumentList $modulePath
+} -IntervalMilliseconds 2000 -ArgumentList $promptJob -InitializationScript $importModuleScript -InitializationArgumentList $modulePath
+
+
+$initializationScript = {
+    param ($modulePath)
+    Import-Module $modulePath
+    $psVersion = 'PS ' + $PSVersionTable.PSVersion.ToString()
+    $psVersion # For PSUseDeclaredVarsMoreThanAssignments false detection.
+
+    $isInitialProcess = $false
+    $mutex = [System.Threading.Mutex]::new($false, 'Global\DynamicTitleAllInOneMutex', ([ref]$isInitialProcess))
+    $mutex # For PSUseDeclaredVarsMoreThanAssignments false detection.
+}
 
 $scriptBlock = {
     param($netThroughputJob, $commandStartJob, $promptJob, $gitJob)
@@ -77,7 +88,7 @@ $scriptBlock = {
     $commandEndDate, $location = Get-DTJobLatestOutput $promptJob
     $gitStatus, $gitLocation = Get-DTJobLatestOutput $gitJob
 
-    if ($mbpsReceived -or $mbpsSent)
+    if ($isInitialProcess -and ($mbpsReceived -or $mbpsSent))
     {
         $netThroughputSegment = ''
         if ($mbpsSent)
