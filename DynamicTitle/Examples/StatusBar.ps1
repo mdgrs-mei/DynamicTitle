@@ -8,8 +8,8 @@ if ($IsLinux -or $IsMacOS)
 $modulePath = Join-Path (Get-Module DynamicTitle).ModuleBase 'DynamicTitle.psd1'
 
 $weatherJob = Start-DTJobBackgroundThreadTimer -ScriptBlock {
-    $weather = Invoke-RestMethod https://wttr.in/?format="%c%t\n"
-    $weather.Trim()
+    $weather = Invoke-RestMethod https://wttr.in/?format="%c%t"
+    $weather
 } -IntervalMilliseconds 60000
 
 $systemInfoJob = Start-DTJobBackgroundThreadTimer -ScriptBlock {
