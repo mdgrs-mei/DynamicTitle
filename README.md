@@ -7,7 +7,7 @@
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/dt/DynamicTitle)](https://www.powershellgallery.com/packages/DynamicTitle)
 
 [![Pester Test](https://github.com/mdgrs-mei/DynamicTitle/actions/workflows/pester-test.yml/badge.svg)](https://github.com/mdgrs-mei/DynamicTitle/actions/workflows/pester-test.yml)
-[![devto article](https://img.shields.io/badge/dev.to-0A0A0A?style=for-the-badge&logo=dev.to&logoColor=white)](https://dev.to/mdgrsmei/building-your-own-terminal-status-bar-in-powershell-1j76)
+[![Hashnode](https://img.shields.io/badge/Hashnode-2962FF?style=for-the-badge&logo=hashnode&logoColor=white)](https://mdgrs.hashnode.dev/building-your-own-terminal-status-bar-in-powershell)
 
 *DynamicTitle* is a PowerShell module for advanced console title customizations.
 
