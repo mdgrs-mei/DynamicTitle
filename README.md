@@ -7,11 +7,12 @@
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/dt/DynamicTitle)](https://www.powershellgallery.com/packages/DynamicTitle)
 
 [![Pester Test](https://github.com/mdgrs-mei/DynamicTitle/actions/workflows/pester-test.yml/badge.svg)](https://github.com/mdgrs-mei/DynamicTitle/actions/workflows/pester-test.yml)
+    
 [![Hashnode](https://img.shields.io/badge/Hashnode-2962FF?style=for-the-badge&logo=hashnode&logoColor=white)](https://mdgrs.hashnode.dev/building-your-own-terminal-status-bar-in-powershell)
 
 *DynamicTitle* is a PowerShell module for advanced console title customizations.
 
-https://user-images.githubusercontent.com/81177095/224492181-e6b60d00-438f-446e-90e9-3f8d6c3f8775.mp4
+https://github.com/mdgrs-mei/DynamicTitle/assets/81177095/fc9cfad3-a79a-4cff-a391-9d9f70627815
 
 </div>
 
@@ -21,7 +22,7 @@ The module provides you with the ability to set the console title from a backgro
 
 This module has been tested on:
 
-- Windows 10, Windows 11 and Ubuntu 20.04
+- Windows 10, Windows 11, Ubuntu 20.04 and macOS
 - Windows PowerShell 5.1 and PowerShell 7.3
 
 ## Installation
