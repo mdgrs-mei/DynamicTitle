@@ -12,7 +12,7 @@
 
 *DynamicTitle* is a PowerShell module for advanced console title customizations.
 
-https://github.com/mdgrs-mei/DynamicTitle/assets/81177095/fc9cfad3-a79a-4cff-a391-9d9f70627815
+![DynamicTitle](https://github.com/mdgrs-mei/DynamicTitle/assets/81177095/e606e65b-6a42-4e0c-987a-4df3e2f412f3)
 
 </div>
 
