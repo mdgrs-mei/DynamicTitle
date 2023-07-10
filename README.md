@@ -40,8 +40,7 @@ This one-liner shows a live-updating clock on the title bar. The specified Scrip
 ```powershell
 Start-DTTitle {Get-Date}
 ```
-
-![dt_clock](https://user-images.githubusercontent.com/81177095/224546336-b7ecc18f-31b6-4a9b-9688-22e0da81d266.gif)
+![LiveClock](https://github.com/mdgrs-mei/DynamicTitle/assets/81177095/048aa512-a654-40e9-8187-2d2018eff9b9)
 
 If an array is returned from the script block, they are shown with a vertical scrolling.
 
@@ -49,7 +48,7 @@ If an array is returned from the script block, they are shown with a vertical sc
 Start-DTTitle {'🌷 Hello', '🌼 World'}
 ```
 
-![dt_vertical_scroll](https://user-images.githubusercontent.com/81177095/224547384-37f69aaf-0089-49f6-9728-589679142206.gif)
+![VerticalScroll](https://github.com/mdgrs-mei/DynamicTitle/assets/81177095/d48edd3a-5063-48e4-a231-5a1d80ea5489)
 
 If the title width is fixed by your terminal app or you want to limit the width, you can specify `HorizontalScrollFrameWidth` parameter. The title text Horizontally scrolls when its length is longer than the parameter.
 
@@ -59,7 +58,7 @@ Start-DTTitle {
 } -HorizontalScrollFrameWidth 25
 ```
 
-![dt_horizontal_scroll](https://user-images.githubusercontent.com/81177095/224547683-9c417aa6-689f-403f-809f-ea2c4e696b63.gif)
+![HorizontalScroll](https://github.com/mdgrs-mei/DynamicTitle/assets/81177095/375bf799-6db3-4fd6-a2a0-4313335a9fe7)
 
 ## Jobs
 
