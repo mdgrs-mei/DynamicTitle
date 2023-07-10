@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.4.0] - 2023-07-10
+
+### Added
+
+- Added `Spinner` example
+- Added `Road` example
+
+### Changed
+
+- Changed the `AllInOne` example to show the network segment only in the first process
+
+### Fixed
+
+- Removed a newline in the weather segment of the `StatusBar` example
+
 ## [0.3.0] - 2023-03-26
 
 ### Added
