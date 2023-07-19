@@ -106,7 +106,7 @@ BackgroundTimerJob starts a new thread and calls a ScriptBlock periodically at t
 ```powershell
 $job = Start-DTJobBackgroundThreadTimer -ScriptBlock {
     # Get weather
-    Invoke-RestMethod https://wttr.in/?format="%c%t\n"
+    Invoke-RestMethod https://wttr.in/?format="%c%t"
 } -IntervalMilliseconds 60000
 
 Start-DTTitle {
